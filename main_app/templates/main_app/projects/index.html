@@ -1,9 +1,18 @@
 {% extends 'main_app/base.html' %}
 {% block content %}
 
-<h1>Projects List</h1>
-
-{% for project in projects %}
+<h1 class="center">Projects List</h1>
+<nav>
+  <div class="nav-wrapper">
+    <form action="{% url 'search_results' %}" method="GET">
+      <div class="input-field">
+        <input name="q" placeholder="Search..." type="search" required>
+        <i class="material-icons">X</i>
+      </div>
+    </form>
+  </div>
+</nav>
+{% for project in object_list %}
   <div class="card">
     <a href="{% url 'detail' project.id %}">
       <div class="card-content">
