@@ -12,7 +12,7 @@
     </form>
   </div>
 </nav>
-{% for project in object_list %}
+{% for project in project_list %}
   <div class="card">
     <a href="{% url 'detail' project.id %}">
       <div class="card-content">

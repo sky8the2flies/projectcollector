@@ -44,6 +44,47 @@
         </table>
     </div>
 </div>
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h4>{{project.name}}'s Authors</h4>
+        {% if project.authors.count %}
+            {% for author in project.authors.all %}
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">{{ author.name }}</span>
+                        <p>Github Username: {{ author.git_user }}</p>
+                        <p>Description: {{ author.description }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h4>No Authors?</h4>
+        {% endif %}
+    </div>
+    <div class="col s6">
+        <h3>Available Authors</h3>
+        {% if authors.count %}
+            {% for author in authors.all %}
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">{{ author.name }}</span>
+                        <p>Github Username: {{ author.git_user }}</p>
+                        <p>Description: {{ author.description }}</p>
+                    </div>
+                    <div class="card-action">
+                        <form action="{% url 'assoc_author' project.id author.id %}" post="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">add</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h5>{{project.name}} has all availble authors.</h5>
+        {% endif %}
+    </div>
+</div>
 <script>
     const dateEl = document.getElementById('id_date');
     M.Datepicker.init(dateEl, {
